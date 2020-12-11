@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<title>RentWala</title>
+<!-- ajax -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<!-- fontawesome -->
+<script src="https://kit.fontawesome.com/7ce061f601.js" crossorigin="anonymous"></script>
+<!-- w3.css -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <!-- CSS only -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+<!-- JS, Popper.js, and jQuery -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+{% load static %}
+<link rel='stylesheet' href="{% static 'css/base.css' %}">
+<style>
+    #title{
+        text-decoration: none;
+    }
+    #title:hover{
+        color: lightgrey;
+    }
+    .navul{
+        list-style: none;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 5px;
+    }
+    nav{
+        align-items: center;
+    }
+    .navli{
+        font-weight: bold;
+        font-size: 22px;
+        margin: 1px;
+    }
+    .dropdown-menu{
+        border-radius: 12px;
+    }
+    .popover{
+    color: white;
+    font-size: 20px;
+    height: auto;
+    max-height: 50vh;
+    overflow-y: scroll;
+    background-color: rgb(80, 4, 80);
+    border-radius: 15px;
+    /* text-decoration-color: white; */
+    }
+    .popover::-webkit-scrollbar {
+        width: 10px;
+    }
+
+
+    /* Track */
+    .popover::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    .popover::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+        background: blue; 
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    }
+    .search{
+        width: 40%;
+        margin: auto;
+    }
+    .searchul{
+        list-style: none;
+        text-align: center;
+        color: white;
+    }
+    .searchul a:hover{
+        color: rgb(245, 228, 0);
+        text-decoration: none;
+        padding-left: 10px;
+        text-decoration:wavy;
+    }
+    .searchul hr{
+        color: yellowgreen;
+        background-color: darkgoldenrod;
+        height: 1px;
+        margin: 2px;
+        padding: 0;
+        border: none;
+    }
+    body{
+        background-color: rgba(100,0,120,0.05);
+    }
+
+</style>
+{% block css %} {% endblock %}
+<body>
+    <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none; background-color:  rgb(80, 4, 80);" id="mySidebar">
+        <button class="w3-bar-item w3-xxlarge" style="font-size: 30px;background-color:  rgb(80, 4, 80);text-align: right;"
+        onclick="w3_close()"><b><i style="color: violet;" class="fas fa-times-circle"></i></b></button>
+        <!-- <button class="w3-bar-item w3-block w3-center-align" onclick="myAccFunc()" style="text-align: center; background-color: black; border: none; color: lightblue;"> 
+        </button>
+        <div id="demoAcc" class="w3-hide w3-card" style="font-size: 16px;">
+        </div>   -->
+        <hr>
+        {% if user.0 == "true" %}  
+        <a class="w3-bar-item w3-center" style="color: rgb(255, 150, 0);" href="/view_profile">View profile</a>
+        <a class="w3-bar-item w3-center" style="color: rgb(255, 150, 0);" href="/manage_orders">View Orders</a>
+        <a class="w3-bar-item w3-center" href="/log_out" style="color: rgb(255, 150, 0);">Log Out(<b>{{user.1}}</b>)</a>
+        {% else %}  
+        <a class="w3-bar-item w3-center" style="color: rgb(255, 150, 0);" href="/log_in">Log in</a>
+        <a class="w3-bar-item w3-center" style="color: rgb(255, 150, 0);" href="/sign_up">Register</a>
+        {% endif %} 
+        <a style="bottom: 0;position: absolute;color: rgb(255, 150, 0);" class="w3-bar-item w3-center" href="/contact_us">@Contact Us</a> 
+        <hr>
+    </div>
+    <div id="main">
+        <div class="mynav">
+            <button id="openNav" style="color:white;" class="btn w3-xlarge" onclick="w3_open()"><i style="color: white;" class="fas fa-ellipsis-v"></i></button>
+            <a href="/" style="color: white; text-decoration: none;margin-left: 5%;"><b>StoreForent</b>&nbsp;<b><i style="color:rgb(240, 223, 223);" class="fas fa-truck-moving"></i></b></a>
+            <div class="search">
+                <input class="form-control mr-sm-2" id="search" type="search" placeholder="Search For Items" aria-label="Search" autocomplete="off">
+                <a popover-class="popover" data-container="body" id="searchpop" data-html="true" data-toggle="popover" data-placement="bottom" data-content=""></a>
+            </div>
+            <!-- {% if user.0 == "true" %}
+                <img style="width: 50px; height: 50px;border-radius: 50px; margin-right: 8px;" src="/media/{{user.2}}">
+            {% endif %}     -->
+        </div>
+    </div>
+    
+    {% block body %} {% endblock %}
+</body>
+    <script>
+        $('#search').on('keyup', function(){
+            var query = $(this).val();
+            $.ajax({
+            url: '/search',
+            type: 'GET',
+            data:{'cat': query},
+            success: function(data){
+                d = JSON.parse(data);
+                data = d;
+                var lst = '<ul class="searchul">';
+                for (var i=0; i<data.length; i++){
+                    lst += '<li class="searchli"><a class=searcha href="/bucketview/' + data[i] + '"</a>' + data[i] + '</li><hr>';
+                }
+                lst += '</ul>';
+                if (query == '' || query== ' '){
+                    $('#searchpop').popover('hide');
+                }
+                else{
+                    document.getElementById('searchpop').setAttribute('data-content', lst);
+                    $('#searchpop').popover('show');
+                }
+            }
+            });
+        });
+        $('#search').on('blur', function(){
+            $('#searchpop').popover('hide');
+        });
+        $('#search').on('focus', function(){
+            $('#searchpop').popover('show');
+        });
+    </script>
+    <script src="{% static 'js/base.js' %}"></script>
+</html>

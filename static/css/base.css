@@ -1,0 +1,108 @@
+
+.search{
+width: 50%;
+margin: auto;
+}
+.popover{
+    color: red;
+    font-size: 20px;
+    height: auto;
+    max-height: 50vh;
+    overflow-y: scroll;
+    background-color: darkblue;
+    border-radius: 15px;
+    text-decoration-color: white;
+}
+.popover::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+/* Track */
+.popover::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/* Handle */
+.popover::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: blue; 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+#mySidebar::-webkit-scrollbar {
+    width: 10px;
+}
+#loadingpop{
+    color: white;
+    background-color: black;
+}
+/* Track */
+#mySidebar::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/* Handle */
+#mySidebar::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: blue; 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+.w3-sidebar{
+background-color: rgba(0,0,0,0.6);
+color: white;
+font-weight: bolder;
+font-size: 20px;
+}
+.w3-bar-block .w3-bar-item {
+text-align: center;
+}
+.w3-bar-block .w3-bar-item:hover{
+    background-color: rgb(0, 0, 0);
+}
+.mynav{
+display: flex;
+background-color: rgb(80, 4, 80);
+align-items: center;
+position:sticky;
+}
+.searchul{
+    list-style: none;
+    text-align: center;
+    color: white;
+}
+.searchul a:hover{
+    color: lightgray;
+    text-decoration: none;
+    padding-left: 30px;
+}
+.searchul a:hover{
+    color: gray;
+    text-decoration: none;
+    padding-left: 10px;
+}
+.searchul hr{
+    color: yellowgreen;
+    background-color: darkgoldenrod;
+    height: 1px;
+    margin: 2px;
+    padding: 0;
+    border: none;
+}
+#title{
+font-size: 20px;
+font-weight: bold;
+align-items: center;
+margin-left: 5%;
+}
+#title2:hover{
+    text-decoration: none;
+}
+#demoAcc a:hover{
+    color: white;
+}

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %} Home {% endblock %}
+{% load static %}
+{% block css %}
+<style>
+    .card-img-top{
+        height: 168px;
+        width: 318px;
+        max-height: 80%;
+        max-width: 100%;
+        border-radius: 25px;
+    }
+    .card{
+        height: 35vh;
+        border: none;
+        background-color: whitesmoke;
+        color: white;
+        border: solid 2px rgb(80, 4, 80);
+        border-radius: 20px;
+        box-shadow: 8px 10px 20px rgb(80, 4, 80);
+    }
+    .card-body{
+        padding: 0;
+        margin: 0;
+    }
+    .col-6, .col-sm-6, .col-lg-3{
+        padding: 0;
+    }
+    @media only screen and (max-width: 600px){
+        .card-img-top{
+            height: 168px;
+            width: 318px;
+            max-height: 80%;
+            max-width: 100%;
+        }
+        .card{
+            height: auto;
+            max-height: 27vh;
+            box-shadow: 4px 5px 10px rgb(80, 4, 80);
+        }
+    }
+</style>
+{% endblock %}
+{% block body %}
+    <h3 style="background-color: lightgray; margin-top: 6px;padding: 2px;padding-left: 15px;">{{cat}} -</h3>
+    <div class="container-fluid">
+        <div class="row" style="justify-content: space-around;">
+            {% for i in items %}
+                <div class="card m-2 col-5 col-sm-5 col-lg-2" style="width: 20rem;">
+                    <img src="/static/img/{{i.Poster}}" class="card-img-top" alt="{{i.title}}" style="padding: 5px;">
+                    <div class="card-body" style="border-radius: 7px;">
+                        <a class="w3-center" href="/bucketview/{{i.title}}" style="padding: 0;"><h5 class="card-title" style="border-radius: 10px;margin: 2px;background-color: rgb(80, 4, 80);color: white;">{{i.title}}</h5></a>
+                    </div> 
+                </div>       
+            {% endfor %}        
+        </div>
+    </div>
+{% endblock %}

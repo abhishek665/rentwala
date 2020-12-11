@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %} Home {% endblock %}
+{% load static %}
+{% block css %}
+<style>
+</style>
+{% endblock %}
+{% block body %}
+    <h1 class="w3-center" style="margin-top: 15%;">{{messages}}<a style="color: blue;" href="/log_in">{{links}}{{return}}</a><a style="color: blue;" href="/">{{home}}</a>
+        <a style="color: blue;" href="/edit_profile">{{edit_profile}}</a>
+    </h1>
+{% endblock %}

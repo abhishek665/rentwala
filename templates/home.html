@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+{% block title %} Home {% endblock %}
+{% load static %}
+{% block css %}
+<link rel='stylesheet' href="{% static 'css/homes.css' %}">
+<style>
+  .fas{
+    color: black;
+  }
+  .card-title{
+    color: black;
+  }
+  #top_carousel{
+    display: flex;
+    justify-content: space-around;
+    box-shadow: 5px 5px 20px darkviolet;
+  }
+  #top-image{
+    margin: 0;
+    padding: 0;
+    /* opacity: 0.9; */
+  }
+  #WhatYouWantToRent{
+    width: 60%;
+  }
+  .card{
+    box-shadow: 8px 10px 20px rgb(80, 4, 80);
+  }
+  @media screen and (max-width: 380px){
+    #WhatYouWantToRent{
+      width: 80%;
+    }
+    
+  }
+</style>
+{% endblock %}
+{% block body %}
+<h3 class="p-2" style="border-radius: 50px; width: 60%; background-color:  rgb(80, 4, 80); color: white;">Top Offers :</h3>
+<div class="container-fluid mt-2" id="top_carousel">
+    <div id="carouselExampleSlidesOnly1" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <h1><i class="fas fa-sink"></i>
+            <p class="w3-center top_offers"><a href="/"><b>KITCHEN</b></a></p>
+          </h1>
+        </div>
+      </div>
+    </div>
+    <div id="carouselExampleSlidesOnly2" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <h1><i class="fas fa-phone"></i>
+              <p class="w3-center top_offers"><a href="/"><b>PHONE</b></a></p>
+            </h1>
+          </div>
+        </div>
+    </div>
+    <div id="carouselExampleSlidesOnly3" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <h1><i class="fas fa-keyboard"></i>
+              <p class="w3-center top_offers"><a href="/"><b>KEYBOARDS</b></a></p>
+            </h1>
+          </div>
+        </div>
+    </div>
+    <div id="carouselExampleSlidesOnly4" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <h1><i class="fas fa-book"></i>
+              <p class="w3-center top_offers"><a href="/"><b>BOOKS</b></a></p>
+            </h1>
+          </div>
+        </div>
+    </div>
+    <div id="carouselExampleSlidesOnly5" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <h1><i class="fas fa-home"></i>
+              <p class="w3-center top_offers"><a href="/"><b>HOME</b></a></p>
+            </h1>
+          </div>
+        </div>
+    </div>
+    <div id="carouselExampleSlidesOnly6" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <h1><i class="fas fa-tools"></i>
+            <p class="w3-center top_offers"><a href="/"><b>TOOL</b></a></p>
+          </h1>
+        </div>
+      </div>
+    </div>
+    <div id="carouselExampleSlidesOnly7" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <h1><i class="fas fa-mouse"></i>
+            <p class="w3-center top_offers"><a href="/"><b>MOUSE</b></a></p>
+          </h1>
+        </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div id="top-image" class="container-fluid mt-2"></div> -->
+
+<h3 class="mt-4 p-2" style="border-radius: 50px;background-color:  rgb(80, 4, 80); color: white;" id="WhatYouWantToRent">
+  What You Want To Rent :)
+</h3>
+
+{% if not user.0 == "true" %}
+<div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center">
+<div class="toast" style="background-color: white;border-radius: 50px;border-color: darkgrey ;padding-left: 40px; padding-right: 40px;" aria-live="polite" aria-atomic="true" data-delay="100000">
+<div role="alert" style="background-color: white;" aria-live="assertive" aria-atomic="true">
+  <div class="toast-header" style="background-color: white;">
+    <img src="{% static 'img/toast.png' %}" style="width: 50px; height: 50px;" class="rounded mr-2" alt="...">
+    <strong class="mr-auto" style="color: red;">LogIn/SignUp</strong>
+    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="toast-body">
+    You are 1 step away from renting things. Please <a style="color: blue;" href="/log_in">Log in</a> or <a style="color: blue;" href="sign_up">SignUp</a> To Continue Renting.
+  </div>
+</div>
+</div>
+</div>
+{% endif %}
+
+    <div class="container mt-2">
+      <div class="row" style="justify-content: space-evenly;">
+          <div class="card col-6 col-lg-3" style="width: auto;">
+              <div class="card-body">
+                <h3 class="card-title" style="text-align: center;"><a href="/bucket/computer-software-and-hardware">Computer Software And Hardware&nbsp; <i class="fas fa-mouse"></i></a></h3>
+              </div>
+          </div>
+          <div class="card col-5 col-lg-3" style="width: auto;">
+              <div class="card-body">
+                <h3 class="card-title" style="text-align: center;"><a href="/bucket/mobile-phone-accessories">Mobile Phone Accessories&nbsp; <i class="fas fa-book"></i></a></h3>
+              </div>
+          </div>
+          <div class="card col-5 col-lg-3" style="width: auto;">
+              <div class="card-body">
+                <h3 class="card-title" style="text-align: center;"><a href="/bucket/home">Home&nbsp; <i class="fas fa-home"></i></a></h3>
+              </div>
+          </div>
+          <div class="card col-5 col-lg-3" style="width: auto;">
+              <div class="card-body">
+                <h3 class="card-title" style="text-align: center;"><a href="/">Kitchen&nbsp; <i class="fas fa-sink"></i></a></h3>
+              </div>
+          </div>
+          <div class="card col-5 col-lg-3" style="width: auto;">
+              <div class="card-body">
+                <h3 class="card-title" style="text-align: center;"><a href="/">Electric Tools&nbsp; <i class="fas fa-tools"></i></a></h3>
+              </div>
+          </div>
+          <div class="card col-5 col-lg-3" style="width: auto;">
+              <div class="card-body">
+                <h3 class="card-title" style="text-align: center;"><a href="/">Home Construction Equipments&nbsp; <i class="fas fa-building"></i></a></h3>
+              </div>
+          </div>
+          <div class="card col-5 col-lg-3" style="width: auto;">
+              <div class="card-body">
+                <h3 class="card-title" style="text-align: center;"><a href="/">PC`s&nbsp; <i class="fas fa-laptop"></i></a></h3>
+              </div>
+          </div>
+          <div class="card col-5 col-lg-3" style="width: auto;">
+              <div class="card-body">
+                <h3 class="card-title" style="text-align: center;"><a href="/">Phones&nbsp; <i class="fas fa-mobile-alt"></i></a></h3>
+              </div>
+          </div>
+          <div class="card col-5 col-lg-3" style="width: auto;">
+              <div class="card-body">
+                <h3 class="card-title" style="text-align: center;"><a href="/">Books&nbsp; <i class="fas fa-book"></i></a></h3>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <script>
+      $('.toast').toast('show');
+      // $(document).ready(function(){
+      //       var width = window.outerWidth;
+      //       console.log(width)
+      //       if (width < 600){
+      //           document.getElementById('top-image').innerHTML = '<img src="/static/img/logo.png" style="width:100vw;height:30vh">';
+      //       }
+      //   });
+      // https://static-rtz.nyc3.digitaloceanspaces.com/static/rentwala/img/{{i.Poster}}
+    </script>
+{% endblock %}

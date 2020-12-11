@@ -1,0 +1,30 @@
+.card{
+    margin: 4px;
+    border-radius: 25px;
+    background-color: whitesmoke;
+    color: black;
+    border: solid 5px rgba(0, 0, 0, 0.3);
+}
+.card-title{
+    display: inline-block;
+}
+h3{
+    display: inline-block;
+}
+.top_offers{
+    font-size: 12px;
+}
+@media screen and (max-width: 600px){
+    h3{
+        font-size: 18px;
+    }
+    .card{
+        width: 50px;
+    }
+    .top_offers{
+        font-size: 11px;
+    }
+    .card{
+        box-shadow: 4px 5px 10px rgb(80, 4, 80);
+    }
+}

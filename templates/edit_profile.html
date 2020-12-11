@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block title %} Home {% endblock %}
+{% load static %}
+{% block css %}
+
+    <style>
+      /* .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      } */
+    </style>
+    <!-- Custom styles for this template -->
+{% endblock %}
+{% block body %}
+<form class="m-4" method="POST" action="/edit_profile/" enctype="multipart/form-data">{% csrf_token %}
+  <!-- <img class="mb-4" src="../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"> -->
+  <h1 class="h3 mb-3 w3-center font-weight-normal">{{profile.name}}</h1>
+  <label for="full_name">Full Name</label>
+  <input type="text" name="name" id="full_name" value="{{profile.name}}" class="form-control" placeholder="Full Name" required autofocus>
+  <label for="inputEmail">Email address</label>
+  <input type="email" name="email" id="inputEmail" class="form-control" value="{{profile.email}}" placeholder="Email address" required autofocus>
+  <label for="address">Your Current Address</label>
+  <input type="text" class="form-control" placeholder="Your Current Address" value="{{profile.address}}" name="address" id="address" required>
+  <button type="button" class="btn btn-primary mb-2 mt-2" data-toggle="modal" data-target="#exampleModal">
+    Change Password
+  </button>
+  <button onclick="return check();" class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+  <p class="mt-5 mb-3 text-muted">&copy; 2020</p>
+</form>
+<!--Password Change Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form method="POST" action="/change_password/">{% csrf_token %}
+            <div class="form-group">
+                <label for="current_password">Current Password</label>
+                <input type="password" name="current_password" class="form-control" id="current_password" aria-describedby="emailHelp" required>
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="new_password">New Password</label>
+                <input type="password" name="new_password" class="form-control" id="new_password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password</label>
+                <input type="password" name="confirm_password" class="form-control" id="confirm_password" required>
+            </div>
+            <button onclick="return check();" type="submit" class="btn btn-primary">Submit</button>
+            </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </div>
+    </div>
+</div>
+</div>
+
+<script>
+    function check(){
+      pass1 = document.getElementById('new_password').value;
+      pass2 = document.getElementById('confirm_password').value;
+      if (pass1 == pass2){
+        return true
+      }
+      else{
+        alert("Passwords Dont Match");
+        return false
+      }
+    }
+</script>
+{% endblock %}

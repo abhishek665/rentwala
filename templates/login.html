@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% block title %} Home {% endblock %}
+{% load static %}
+{% block css %}
+<style>
+    h6{
+        color: white;
+    }
+    #popover{
+        background-color: whitesmoke;
+        border: none;
+    }
+</style>
+{% endblock %}
+{% block body %}
+<div class="container">
+    <h3><b>Please Login To continue :-</b></h3>
+    <form action="/log_in/" method="POST">{% csrf_token %}
+        <input type="tel" name="phone" placeholder="Phone">
+        <input type="password" id="Password" name="password" placeholder="Password">
+        <input type="submit" class="btn btn-success" name="submit" id="">
+    </form>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Forgot Password
+    </button>      
+    <h5>Dont Have Account?&nbsp;<a href="/sign_up"><b>SignUp</b></a></h5>
+</div>
+<!-- Modal for Forgot password -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header w3-purple">
+          <h5 class="modal-title" id="exampleModalLabel">Confirm Phone</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="container">
+            <p id="desc"></p>
+            <div class="form-group" id="form-group">
+                <label for="phone">Enter Your Registered Mobile Number</label>
+                <input type="tel" id="phone" class="form-control">
+            </div>
+            <button id="submit" class="btn btn-primary">Submit</button>
+        </div>
+        <button type="button" style="margin-top: 50px;" id="popover" class="btn btn-secondary" data-container="body" data-toggle="popover" data-html="true" data-placement="bottom" data-content=""></button>
+        <div class="modal-footer w3-purple">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+    function validate(){
+        var otp = document.getElementById('otp').value;
+        console.log(otp);
+        $.ajax({
+            type: 'post',
+            url: '/validate_otp/',
+            data: {'otp' : otp, 'csrfmiddlewaretoken': '{{ csrf_token }}', 'forgot_password': true},
+            success : function(data){
+                $('#popover').popover('hide');
+                d = String(data);
+                console.log(d)
+                if (d == 'Success'){
+                    document.getElementById('popover').setAttribute('data-content', '<h6 style="color:white;">Password sent Successfully on Your Registered Phone Number. Please <a style="color:blue;" href="/log_in">LogIn</a> And Change Your Password Immediately.</h6>');
+                    $('#popover').popover('show');
+                }
+                if (d == 'OTP Incorrect'){
+                    document.getElementById('popover').setAttribute('data-content', '<h6 style="color:white;">Invalid OTP</h6>');
+                    $('#popover').popover('show');
+                }
+                if (d == 'OTP Expired'){
+                    document.getElementById('popover').setAttribute('data-content', '<h6 style="color:white;">OTP Expired. Please Return To the Login Page To request a New One.</h6>'); 
+                    $('#popover').popover('show');
+                }
+            }
+        });
+    }
+</script>
+<script>
+    $('#submit').on("click", function(){
+        var phone = document.getElementById('phone').value;
+        $.ajax({
+            type: 'post',
+            url: '/validate/',
+            data: {'forgot_phone': phone, 'csrfmiddlewaretoken': '{{ csrf_token }}', 'forgot_password': true, 'phone': phone},
+            beforeSend: function(){
+                document.getElementById('popover').setAttribute('data-content', '<h6 style="color:white;">Please Wait...</h6>');
+                $('#popover').popover('show');
+            },
+            success: function(data){
+                console.log(data);
+                $('#popover').popover('hide');
+                d = String(data)
+                if (d == 'Sent Successfully'){
+                    document.getElementById('phone').setAttribute('placeholder', 'Enter Otp');
+                    document.getElementById('desc').innerText = "Enter Otp";
+                    document.getElementById('container').innerHTML = '<input type="tel" id="otp" placeholder="Enter OTP Within 1 Min.">';
+                    document.getElementById('container').innerHTML += '<button class="btn btn-success" id="cnfrmotp" onclick="return validate();">Submit</button>'; 
+                }
+                if (d == "User Exists"){
+                    document.getElementById('popover').setAttribute('data-content', '<h6 style="color:white;">User Already Exists With This Number. Please Try a Different Number.</h6>');
+                    $('#popover').popover('show');
+                }
+                if (d == "Limit Exceeded"){
+                    document.getElementById('popover').setAttribute('data-content', '<h6 style="color:white;">OTP Request Limit Exceeded. Account Can not Be Recovered. Please Try Remembering Your Password.</h6>');
+                    $('#popover').popover('show');
+                }
+                if (d == "OTP Sending Error"){
+                    document.getElementById('popover').setAttribute('data-content', '<h6 style="color:white;">OTP Can not Be Sent Right Now. Please Try After Sometime.</h6>');
+                    $('#popover').popover('show');
+                }
+                if (d == "No Phone Number Provided"){
+                    document.getElementById('popover').setAttribute('data-content', '<h6 style="color:white;">Please Provide a Valid Phone Number To Continue.</h6>');
+                    $('#popover').popover('show');
+                }
+                if (d == "Invalid Phone Length"){
+                    document.getElementById('popover').setAttribute('data-content', '<h6 style="color:white;">Please Provide a Valid 10 Digit Phone Number.</h6>');
+                    $('#popover').popover('show');
+                }
+            }
+        })
+    });
+</script>
+{% endblock %}
